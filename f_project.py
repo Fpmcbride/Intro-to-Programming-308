@@ -74,7 +74,18 @@ def widmark_formula(tot_drinks,weight,gender,hours):
     bac=(((tot_drinks*.06*100*1.055)/(weight*gender_val))-(.015*hours))
     return bac
 def advice(bac):
-    slut=2
+    if bac>=.08:
+        print("DON'T DRIVE! You will receive a DUI and endanger the public")
+    if bac>=.10:
+        print("You're on the road to sloppiness.")
+    if bac>=.20:
+        print("You're most likely blacked out right now.")
+    if bac>=.25:
+        print("You are at a high risk of choking on your own vomit.")
+    if bac>=.35:
+        print("Coma is possible. Stop drinking.")
+    if bac>=.4:
+        print("You are about become a vegetable and may die due to respiratory arrest.")
 
 def receipt(drink_info,widmark_formula,name):
     print("Hello,",name,"you have consumed:")
@@ -83,7 +94,8 @@ def receipt(drink_info,widmark_formula,name):
         amount=drink_info[i][1]
         msg=str(amount,"drinks of",alch)
         print(msg)
-    print("Your Blood Alcohol Content is:",bac)
+    print("Your Blood Alcohol Content is:",widmark_formula)
+    advice(widmark_formula)
     
 
 def main():
@@ -94,7 +106,7 @@ def main():
     e=get_gender()
     f=get_time()
     g=windmark_formula(c,d,e,f)
-    h=receipt(b,g,a)
+    h=receipt(b,g,a,)
     print(h)
     
 main()
