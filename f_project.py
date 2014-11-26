@@ -13,7 +13,7 @@ def get_content():
         type_alc=input("What kind of alcohol are you drinking?: ")
         if (type_alc=="done"):
             a=False
-            return a
+            return drink_info
         print("1 drink = 1 shot(1.5oz) or 1 beer(12oz) or 1 glass(5oz) of wine")
         drinks=int(input("How many drinks have you had?: "))
         print("When done entering drinks type 'done' in alcohol type prompt")
@@ -74,6 +74,7 @@ def widmark_formula(tot_drinks,weight,gender,hours):
         gender_val=.68
     bac=(((tot_drinks*.06*100*1.055)/(weight*gender_val))-(.015*hours))
     return bac
+
 def advice(bac):
     if bac>=.08:
         print("DON'T DRIVE! You will receive a DUI and endanger the public")
@@ -88,27 +89,27 @@ def advice(bac):
     if bac>=.4:
         print("You are about become a vegetable and may die due to respiratory arrest.")
 
+
 def receipt(drink_info,widmark_formula,name):
+    print("---------------------------------")
     print("Hello,",name,"you have consumed:")
     for i in range(len(drink_info)):
         alch=drink_info[i][0]
         amount=drink_info[i][1]
-        msg=str(amount,"drinks of",alch)
-        print(msg)
+        print(amount,'drinks of', alch)
     print("Your Blood Alcohol Content is:",widmark_formula)
     advice(widmark_formula)
-    
+    print("----------------------------------")
 
 def main():
     a=user_name()
     b=get_content()
-    c=total_drinks(b[:])
+    c=total_drinks(b)
     d=get_weight()
     e=get_gender()
     f=get_time()
-    g=windmark_formula(c,d,e,f)
+    g=widmark_formula(c,d,e,f)
     h=receipt(b,g,a,)
-    print(h)
     
 main()
           
