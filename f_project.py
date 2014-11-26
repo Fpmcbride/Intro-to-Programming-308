@@ -8,6 +8,7 @@ def user_name():
 def get_content():
     a=True
     drink_info=[] 
+    #for loop instead of a while loop maybe
     while (a):
         type_alc=input("What kind of alcohol are you drinking?: ")
         if (type_alc=="done"):
