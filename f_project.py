@@ -5,6 +5,7 @@ import tkinter.scrolledtext as tkst
 
 alch = []
 drinks = []
+errors = []
 
 class application(object):
     
@@ -15,11 +16,11 @@ class application(object):
     def get_alchohol():
         ans = e4.get()
         alch.append(ans)
-        return alch
+        
     def get_drinks():
         ans = int(e5.get())
         drinks.append(ans)
-        return drinks
+            
     
     def get_alchohol_list():
         application.get_alchohol()
@@ -35,19 +36,15 @@ class application(object):
             ans = .68
         if (ans == 'Female'):
             ans = .55
+        else:
+            ans = 1
         return ans
 
     def time_since_last_drink():
         ans = e6.get()
         return ans
 
-    def widmark_formula(tot_drinks,weight,gender,hours):
-        if gender==1:
-            gender_val=.55
-        else:
-            gender_val=.68
-        bac=(((tot_drinks*.06*100*1.055)/(weight*gender_val))-(.015*hours))
-        return bac
+    
 
     def advice(bac):
         if bac>=.08:
@@ -69,27 +66,39 @@ class application(object):
 
     def quit():
         global root
-        root.destroy()    
-    
+        root.destroy()
+
+    def check(weight, gender_val, hours,drinks):
+        a = sum(drinks)
+        b = abs(a)
+        if (weight < 0):
+            errors.append("Please Enter a Valid weight!")
+        if (gender_val == 1):
+            errors.append("Please Enter a Valid Gender!")
+        if (hours < 0):
+            errors.append("Please Enter a Valid Amount of hours!")
+        if (a < b):
+            errors.append("Please Enter All Positive Numbers for the Amount of Drinks you have had of each Alchohol")
     def main():
         name = application.user_name()
         weight = float(application.get_weight())
         gender_val = float(application.get_gender())
         hours = float(application.time_since_last_drink())
         b = sum(drinks)
-
-        
-        
-        bac=(((b*.06*100*1.055)/(weight*gender_val))-(.015*hours))
-    
-
-        print("--------------------------------------------------")
-        print("Hello", name,"Your Blood alchohol is:",bac)
-        for i in range(len(alch)):
-            print("You have had",drinks[i],"drinks of",alch[i])
-        print(b,"drinks in total")
-        advice = application.advice(bac)
-        print("--------------------------------------------------")
+        check_errors = application.check(weight, gender_val, hours,drinks)
+        if (len(errors) > 0):
+            for i in range(len(errors)):
+                print(errors[i])
+            print("Please Exit the program and Try Again!")
+        else:
+            bac=(((b*.06*100*1.055)/(weight*gender_val))-(.015*hours))
+            print("--------------------------------------------------")
+            print("Hello", name,"Your Blood alchohol is:",bac)
+            for i in range(len(alch)):
+                print("You have had",drinks[i],"drinks of",alch[i])
+            print(b,"drinks in total")
+            advice = application.advice(bac)
+            print("--------------------------------------------------")
 
 
         
