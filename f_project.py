@@ -34,7 +34,7 @@ class application(object):
         ans = e3.get()
         if (ans == 'Male'):
             ans = .68
-        if (ans == 'Female'):
+        elif (ans == 'Female'):
             ans = .55
         else:
             ans = 1
