@@ -12,7 +12,7 @@ class application(object):
     def user_name():
         ans = e1.get()
         return ans
-    alch = []
+    
     def get_alchohol():
         ans = e4.get()
         alch.append(ans)
